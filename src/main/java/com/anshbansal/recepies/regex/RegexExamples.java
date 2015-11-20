@@ -1,6 +1,6 @@
 package com.anshbansal.recepies.regex;
 
-import com.anshbansal.util.Regex;
+import com.anshbansal.util.RegexUtil;
 
 import java.util.List;
 
@@ -8,6 +8,6 @@ public class RegexExamples {
 
     static List<String> insideDoubleSquareBrackets(String str) {
         String regex = "\\[\\[(.*?)]]";
-        return Regex.findAllMatches(str, regex, 1);
+        return RegexUtil.findAllMatches(str, regex, 1);
     }
 }

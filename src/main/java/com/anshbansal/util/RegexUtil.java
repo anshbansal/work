@@ -7,7 +7,9 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Regex {
+public class RegexUtil {
+
+    public static final String WORD_BOUNDARY = "\\b";
 
     public static Matcher getMatcher(String string, String regex) {
 

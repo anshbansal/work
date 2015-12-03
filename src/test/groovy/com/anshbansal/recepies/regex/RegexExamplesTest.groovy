@@ -23,7 +23,7 @@ class RegexExamplesTest extends Specification {
     def "test that replaceConsecutiveDuplicates( #input ) returns #expected"() {
 
     expect:
-        RegexExamples.replaceConsecutivesDuplicatesByOne(input) == expected
+        RegexExamples.replaceConsecutiveDuplicatesByOne(input) == expected
 
     where:
         input | expected
@@ -32,6 +32,19 @@ class RegexExamplesTest extends Specification {
         "aass"     | "as"
         "aaaaaaas" | "as"
         "asasas"   | "asasas"
+    }
+
+    def "test that #input after bracket removal becomes #expected"() {
+
+    expect:
+        RegexExamples.removeBrackets(input) == expected
+    where:
+        input | expected
+        ""        | ""
+        "("       | ""
+        "()"      | ""
+        "({{{}]]" | ""
+        "abc"     | "abc"
     }
 
 }

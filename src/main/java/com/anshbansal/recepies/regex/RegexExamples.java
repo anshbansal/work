@@ -11,8 +11,14 @@ public class RegexExamples {
         return RegexUtil.findAllMatches(str, regex, 1);
     }
 
-    static String replaceConsecutivesDuplicatesByOne(String str) {
+    static String replaceConsecutiveDuplicatesByOne(String str) {
         String regex = "(.)\\1+";
         return str.replaceAll(regex, "$1");
+    }
+
+    static String removeBrackets(String str) {
+        //TODO Need to see why need to escape brackets
+        String regex = "[\\(\\)\\{\\}\\[\\]]";
+        return str.replaceAll(regex, "");
     }
 }

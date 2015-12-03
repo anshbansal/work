@@ -13,6 +13,14 @@ public class InputUtil {
         return result;
     }
 
+    public static List<Integer> getIntegers(Scanner sc, int n) {
+        List<Integer> result = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) {
+            result.add(sc.nextInt());
+        }
+        return result;
+    }
+
     public static List<String> getStrings(Scanner sc, int n) {
 
         List<String> result = new ArrayList<>(n);

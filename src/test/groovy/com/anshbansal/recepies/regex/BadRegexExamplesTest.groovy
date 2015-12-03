@@ -1,10 +1,12 @@
 package com.anshbansal.recepies.regex
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
+@Unroll
 class BadRegexExamplesTest extends Specification {
 
-    def "test that number greater than 75 regex works"() {
+    def "test that #input > 75 is #expected"() {
 
     expect:
         BadRegexExamples.greaterThan75(input) == expected

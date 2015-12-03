@@ -10,4 +10,9 @@ public class RegexExamples {
         String regex = "\\[\\[(.*?)]]";
         return RegexUtil.findAllMatches(str, regex, 1);
     }
+
+    static String replaceConsecutivesDuplicatesByOne(String str) {
+        String regex = "(.)\\1+";
+        return str.replaceAll(regex, "$1");
+    }
 }

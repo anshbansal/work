@@ -6,6 +6,18 @@ import spock.lang.Unroll
 @Unroll
 class RegexExamplesTest extends Specification {
 
+
+    def "test that splitting #input with #delimiter returns #expected"() {
+
+    expect:
+        RegexExamples.splitAndKeepDelimiters(input, delimiter) == expected
+
+    where:
+        input | delimiter | expected
+        ""      | ""  | [""]
+        "a;b;c" | ";" | ["a", ";", "b", ";", "c"]
+    }
+
     def "test that insideDoubleSquareBrackets( #input ) returns #expected"() {
 
     expect:
@@ -45,6 +57,19 @@ class RegexExamplesTest extends Specification {
         "()"      | ""
         "({{{}]]" | ""
         "abc"     | "abc"
+    }
+
+    def "test that after splitting #input keeping digits together we get #expected "() {
+
+    expect:
+        RegexExamples.splitKeepingNumbersTogether(input) == expected
+    where:
+        input | expected
+        ""             | [""]
+        "123"          | ["123"]
+        "aa123"        | ["a", "a", "123"]
+        "(124); (123)" | ["(", "124", ")", ";", " ", "(", "123", ")"]
+        "a123;()45"    | ["a", "123", ";", "(", ")", "45"]
     }
 
 }

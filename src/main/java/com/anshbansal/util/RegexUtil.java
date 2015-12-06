@@ -9,7 +9,20 @@ import java.util.regex.Pattern;
 
 public class RegexUtil {
 
+    /********** For getting regex for larger regular expressions **********/
+
     public static final String WORD_BOUNDARY = "\\b";
+
+    /**
+     * Used for creating regex for splitting with delimiter keeping the delimiter
+     * @param delimiter Delimiter to split with
+     * @return Regex to split with delimiter
+     */
+    public static String withDelimiter(String delimiter) {
+        return "((?=" + delimiter + ")|(?<=" + delimiter + "))";
+    }
+
+    /********** Utilities for calculating regex **********/
 
     public static Matcher getMatcher(String string, String regex) {
 

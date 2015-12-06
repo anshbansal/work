@@ -2,6 +2,7 @@ package com.anshbansal.recepies.regex;
 
 import com.anshbansal.util.RegexUtil;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class RegexExamples {
@@ -42,9 +43,13 @@ LOOK-AROUND
 (?!)    Negative lookahead
 */
 
+    /****** GENERIC METHODS ******/
+
     static String[] splitAndKeepDelimiters(String str, String delimiter) {
         return str.split(RegexUtil.withDelimiter(delimiter));
     }
+
+    /****** SPECIFIC METHODS ******/
 
     static List<String> insideDoubleSquareBrackets(String str) {
         String regex = "\\[\\[(.*?)]]";
@@ -63,8 +68,18 @@ LOOK-AROUND
     }
 
     static String[] splitKeepingNumbersTogether(String str) {
-        //TODO Why check for not at beginning is needed? http://stackoverflow.com/questions/34103906/regex-for-splitting-at-brackets-signs-and-letters-keeping-numbers-together
-        //String regex = "(?=\\D)|(?<=\\D)";
-        return str.split(RegexUtil.withDelimiter("\\D"));
+        return splitAndKeepDelimiters(str, "\\D");
+    }
+
+    static List<String> findAllComments(String str) {
+        String regex = "(?-s://(.*))|(?s:/\\*(.*?)\\*/)";
+        return RegexUtil.findAllMatches(str, regex, Arrays.asList(1, 2));
+    }
+
+    static String enterADelimiter(String str, String delimiter, int after) {
+        String regex = String.format("(.{%d})%s", after, RegexUtil.NOT_AT_END);
+        String replacement = "$1" + delimiter;
+
+        return str.replaceAll(regex, replacement);
     }
 }

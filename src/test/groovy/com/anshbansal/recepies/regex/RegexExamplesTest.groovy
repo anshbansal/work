@@ -65,11 +65,42 @@ class RegexExamplesTest extends Specification {
         RegexExamples.splitKeepingNumbersTogether(input) == expected
     where:
         input | expected
-        ""             | [""]
+        ""             | [""] //TODO Find solution
         "123"          | ["123"]
         "aa123"        | ["a", "a", "123"]
         "(124); (123)" | ["(", "124", ")", ";", " ", "(", "123", ")"]
         "a123;()45"    | ["a", "123", ";", "(", ")", "45"]
+    }
+
+    def "test that finding comments in #input returns #expected"() {
+
+    expect:
+        RegexExamples.findAllComments(input) == expected
+
+    where:
+        input | expected
+        ""                     | []
+        "//aseem"              | ["aseem"]
+        "  //aseem"            | ["aseem"]
+        " /*aseem*/  //bansal" | ["aseem", "bansal"]
+        """/*
+            aseem
+*/ //bansal  """    | ["""
+            aseem
+""", "bansal  "]
+
+    }
+
+    def "test that #input with #delimiter to be entered #after returns #expected"() {
+
+    expect:
+        RegexExamples.enterADelimiter(input, delimiter, after) == expected
+
+    where:
+        input | delimiter | after | expected
+        "aseem"           | '|' | 2 | "as|ee|m"
+        ""                | "%" | 3 | ""
+        "Hi How are you?" | "%" | 3 | "Hi %How% ar%e y%ou?"
     }
 
 }

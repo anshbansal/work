@@ -82,4 +82,14 @@ LOOK-AROUND
 
         return str.replaceAll(regex, replacement);
     }
+
+    static String hyphenToCamelCase(String str) {
+        String regex = "(?:^|-)([^-])";
+
+        return RegexUtil.replace(
+                str,
+                regex,
+                matcher -> matcher.group(1).toUpperCase()
+        );
+    }
 }

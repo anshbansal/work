@@ -83,4 +83,19 @@ public class RegexUtil {
         }
         return result;
     }
+
+    public static String replace(
+            String string,
+            String regex,
+            Function<Matcher, String> replaceFunction
+    ) {
+        Matcher matcher = RegexUtil.getMatcher(string, regex);
+        StringBuffer sb = new StringBuffer();
+        while(matcher.find()) {
+            matcher.appendReplacement(sb, replaceFunction.apply(matcher));
+        }
+        matcher.appendTail(sb);
+
+        return sb.toString();
+    }
 }

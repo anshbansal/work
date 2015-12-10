@@ -65,7 +65,7 @@ class RegexExamplesTest extends Specification {
         RegexExamples.splitKeepingNumbersTogether(input) == expected
     where:
         input | expected
-        ""             | [""] //TODO Find solution
+        ""             | [] //TODO Find solution
         "123"          | ["123"]
         "aa123"        | ["a", "a", "123"]
         "(124); (123)" | ["(", "124", ")", ";", " ", "(", "123", ")"]
@@ -101,6 +101,17 @@ class RegexExamplesTest extends Specification {
         "aseem"           | '|' | 2 | "as|ee|m"
         ""                | "%" | 3 | ""
         "Hi How are you?" | "%" | 3 | "Hi %How% ar%e y%ou?"
+    }
+
+    def "test that #input becomes #expected after hyphen to Camel case"() {
+    expect:
+        RegexExamples.hyphenToCamelCase(input) == expected
+
+    where:
+        input | expected
+        "" | ""
+        "aseem" | "Aseem"
+        "aseem-bansal" | "AseemBansal"
     }
 
 }

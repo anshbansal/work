@@ -7,46 +7,11 @@ import java.util.List;
 
 public class RegexExamples {
 
-    ///////////NOTES
-    /*
-\d  digit
-\w  letters, digits, _      U for unicode
-\s  whitespace
-
-(?-m)^  - start of line
-(?-m)$  - end of line
-\A      - start of subject
-\Z      - end of subject
-\b      - word boundaries   Always unicode
-
-FLAGS
-(?d) UNIX LINES
-(?i) CASE_INSENSITIVE
-(?x) COMMENTS
-(?m) MULTILINE
-     LITERAL
-(?s) DOTALL
-(?u) UNICODE_CASE
-     CANON_EQ
-(?U) UNICODE_CHARACTER_CLASS
-
-GROUPS
-()      Group
-(?:)    Non-capturing group
-(?<>)   Named capturing group
-(?>)    Atomic group
-
-LOOK-AROUND
-(?<=)   Positive Lookbehind
-(?=)    Positive Lookahead
-(?<!)   Negative lookbehind
-(?!)    Negative lookahead
-*/
-
     /****** GENERIC METHODS ******/
 
-    static String[] splitAndKeepDelimiters(String str, String delimiter) {
-        return str.split(RegexUtil.withDelimiter(delimiter));
+    public static String[] splitAndKeepDelimiters(String str, String delimiter) {
+        String regex = "((?=" + delimiter + ")|(?<=" + delimiter + "))";
+        return str.split(regex);
     }
 
     /****** SPECIFIC METHODS ******/

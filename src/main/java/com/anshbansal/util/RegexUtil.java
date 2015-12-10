@@ -12,20 +12,7 @@ import java.util.stream.Collectors;
 public class RegexUtil {
 
     //////////// For getting regex for larger regular expressions
-
-    public static final String WORD_BOUNDARY = "\\b";
     public static final String NOT_AT_END = "(?!$)";
-
-    /**
-     * Used for creating regex for splitting with delimiter keeping the delimiter
-     *
-     * @param delimiter Delimiter to split with
-     * @return Regex to split with delimiter
-     */
-    public static String withDelimiter(String delimiter) {
-
-        return "((?=" + delimiter + ")|(?<=" + delimiter + "))";
-    }
 
     ////////////  Functions
 
@@ -40,12 +27,6 @@ public class RegexUtil {
     public static Matcher getMatcher(String string, String regex) {
 
         return Pattern.compile(regex).matcher(string);
-    }
-
-
-    public static List<String> findAllMatches(String string, String regex) {
-
-        return findAllMatches(string, regex, Matcher::group);
     }
 
     public static List<String> findAllMatches(

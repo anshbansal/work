@@ -13,6 +13,13 @@ public class RegexUtil {
 
     //////////// For getting regex for larger regular expressions
     public static final String NOT_AT_END = "(?!$)";
+    public static final String OTHER_THAN_QUOTE = "[^\"]";
+    public static final String QUOTED_STRING = String.format(
+            "\"%s*\"", OTHER_THAN_QUOTE
+    );
+    public static final String COMMA_NOT_INSIDE_QUOTE = String.format(
+      ",(?=(?:%s*%s)*%s*$)", OTHER_THAN_QUOTE, QUOTED_STRING, OTHER_THAN_QUOTE
+    );
 
     ////////////  Functions
 

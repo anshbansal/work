@@ -72,6 +72,20 @@ class RegexExamplesTest extends Specification {
         "a123;()45"    | ["a", "123", ";", "(", ")", "45"]
     }
 
+    def "test that splitting #input by comma ignoring commas in \" gives #expected"() {
+
+        //TODO Add another case after finding the problem of split in splitKeepingNumbersTogether
+    expect:
+        RegexExamples.splitByCommaButIgnoreInQuotes(input) == expected
+    and:
+        RegexByStateMachineExamples.splitByCommaButIgnoreInQuotes(input) == expected
+    where:
+        input | expected
+        "aseem,bansal"               | ["aseem", "bansal"]
+        "aseem,bansal\"2,3\""        | ["aseem", "bansal\"2,3\""]
+        "aseem,bansal\"2,3\",bansal" | ["aseem", "bansal\"2,3\"", "bansal"]
+    }
+
     def "test that finding comments in #input returns #expected"() {
 
     expect:
@@ -104,13 +118,14 @@ class RegexExamplesTest extends Specification {
     }
 
     def "test that #input becomes #expected after hyphen to Camel case"() {
+
     expect:
         RegexExamples.hyphenToCamelCase(input) == expected
 
     where:
         input | expected
-        "" | ""
-        "aseem" | "Aseem"
+        ""             | ""
+        "aseem"        | "Aseem"
         "aseem-bansal" | "AseemBansal"
     }
 

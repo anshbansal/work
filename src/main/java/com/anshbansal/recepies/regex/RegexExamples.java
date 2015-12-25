@@ -9,12 +9,20 @@ public class RegexExamples {
 
     /****** GENERIC METHODS ******/
 
-    public static String[] splitAndKeepDelimiters(String str, String delimiter) {
+    static String[] splitAndKeepDelimiters(String str, String delimiter) {
         String regex = "((?=" + delimiter + ")|(?<=" + delimiter + "))";
         return str.split(regex);
     }
 
     /****** SPECIFIC METHODS ******/
+    static String[] splitKeepingNumbersTogether(String str) {
+        return splitAndKeepDelimiters(str, "\\D");
+    }
+
+    static String[] splitByCommaButIgnoreInQuotes(String str) {
+        //NOTE Better to do by state machine. See RegexByStateMachineExamples
+        return str.split(RegexUtil.COMMA_NOT_INSIDE_QUOTE);
+    }
 
     static List<String> insideDoubleSquareBrackets(String str) {
         String regex = "\\[\\[(.*?)]]";
@@ -32,15 +40,14 @@ public class RegexExamples {
         return str.replaceAll(regex, "");
     }
 
-    static String[] splitKeepingNumbersTogether(String str) {
-        return splitAndKeepDelimiters(str, "\\D");
-    }
-
     static List<String> findAllComments(String str) {
         String regex = "(?-s://(.*))|(?s:/\\*(.*?)\\*/)";
         return RegexUtil.findAllMatches(str, regex, Arrays.asList(1, 2));
     }
 
+    /**
+     * To add a delimiter at particular positions in a String
+     */
     static String enterADelimiter(String str, String delimiter, int after) {
         String regex = String.format("(.{%d})%s", after, RegexUtil.NOT_AT_END);
         String replacement = "$1" + delimiter;

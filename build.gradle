@@ -5,12 +5,12 @@ apply plugin: 'idea'
 sourceSets {
     main {
         java {
-            srcDir 'src'
+            srcDirs = ['src/main/java']
         }
     }
     test {
         groovy {
-            srcDir 'test'
+            srcDirs = ['src/test/groovy']
         }
     }
 }

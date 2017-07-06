@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class InputUtil {
 
     public static int getInt(Scanner sc) {
-
         int result = sc.nextInt();
         sc.nextLine();
         return result;

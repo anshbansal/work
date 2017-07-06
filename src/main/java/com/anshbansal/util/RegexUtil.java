@@ -3,6 +3,7 @@ package com.anshbansal.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -26,13 +27,12 @@ public class RegexUtil {
     static BiFunction<Matcher, List<Integer>, List<String>> allNotNullGroups =
             (matcher, integers) -> integers.stream()
                     .map(matcher::group)
-                    .filter(i -> i != null)
+                    .filter(Objects::nonNull)
                     .collect(Collectors.toList());
 
     ////////////  Utilities for calculating regex
 
     public static Matcher getMatcher(String string, String regex) {
-
         return Pattern.compile(regex).matcher(string);
     }
 
